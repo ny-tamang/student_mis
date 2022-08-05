@@ -11,7 +11,7 @@
 |
 */
 
-
+Auth::routes();
 Route::get('/', function () {
     return view('welcome');
 });
@@ -42,3 +42,9 @@ Route::resource('collegeinfos', 'CollegeInfoController');
 Route::resource('parentinfos', 'ParentInfoController');
 
 
+Route::group(['middleware'=>['auth']],function(){
+    Route::resource('students', 'StudentController');
+  
+    Route::get('/home', 'HomeController@index')->name('home');
+ 
+});
